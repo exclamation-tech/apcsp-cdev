@@ -9,21 +9,21 @@ int main()
 
   char b = 'b';
 
-  printf("char b value: %d and size: %lu bytes\n", b, sizeof(b));
+  printf("char b value: %c and size: %lu bytes\n", b, sizeof(b));
 
   float c = 'c';
 
-  printf("float c value: %d and size %lu bytes\n", c, sizeof(c));
+  printf("float c value: %f and size %lu bytes\n", c, sizeof(c));
 
   double d = 'd';
 
-  printf("double d value: %d and size %lu bytes\n", d, sizeof(d));
+  printf("double d value: %lf and size %lu bytes\n", d, sizeof(d));
 
   short int e = 321;
 
-  printf("short int e value: %d and size %lu bytes\n", e, sizeof(e));
+  printf("short int e value: %hu and size %lu bytes\n", e, sizeof(e));
 
   long int f = 123;
 
-  printf("long int f value: %d and size %lu bytes\n", f, sizeof(f));
+  printf("long int f value: %ld and size %lu bytes\n", f, sizeof(f));
 }
