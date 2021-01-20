@@ -11,7 +11,6 @@ void testEncrypt(int enc, char in[], int shifts[], int slen, char* out)
     encrypt(in, shifts, slen);
   else
     decrypt(in, shifts, slen);
-  
   if (strcmp(in, out) != 0)
     printf("FAIL %s : %s\n", in, out);
   else

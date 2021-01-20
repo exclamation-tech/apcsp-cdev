@@ -75,16 +75,24 @@ void saveStudents(int key)
   //Opens the studentdata file with w+ mode
   fp = fopen(STUFILE, "w+");
 
+  //defines the buffer
+  char buff[1024];
+
   //checks for success
   if (fp) {
     //iterates over numStudents
     for(int i = 0; i < numStudents; i++) {
 
       //writes to file
-      fprintf(fp, "%s %s %d %lu\n", students[i]->firstName, students[i]->lastName, students[i]->age, students[i]->id);
+      sprintf(buff, "%s %s %d %lu\n", students[i]->firstName, students[i]->lastName, students[i]->age, students[i]->id);
+
+      //Encrypts
+      caesarEncrypt(buff, key);
+
+      fprintf(fp, buff);
 
       //prints to user
-      printf("saving: %s %s %d %lu\n", students[i]->firstName, students[i]->lastName, students[i]->age, students[i]->id);
+      printf("saving: %s\n", buff);
     }
 
     //closes file
@@ -116,14 +124,23 @@ void loadStudents(int key)
   //variable to track how many students made
   int studentsLoaded = 0;
 
+  //buffer
+  char buff[1024];
+
   //checks for success
   if(fp) {
 
     //infinite loop until broken
     while(1) {
 
+      //gets buffer from file
+      fgets(buff, 1024, fp);
+
+      //decrypts buffer
+      caesarDecrypt(buff, key);
+
       //scan for files & check the matches
-      if(fscanf(fp, "%s %s %u %ld\n", fname, lname, &age, &id) == 4) {
+      if(sscanf(buff, "%s %s %u %ld\n", fname, lname, &age, &id) == 4) {
 
         //creates the students with the loaded values
         createStudent(fname, lname, age, id);
